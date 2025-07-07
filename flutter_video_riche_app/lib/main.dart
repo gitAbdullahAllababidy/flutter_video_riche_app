@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'views/video_feed_screen.dart';
+import 'views/home_screen.dart';
 
 void main() {
   runApp(const ProviderScope(child: MainApp()));
@@ -15,7 +15,7 @@ class MainApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Video Feed App',
       debugShowCheckedModeBanner: false,
-      home: VideoFeedScreen(),
+      home: HomeScreen(),
     );
   }
 }

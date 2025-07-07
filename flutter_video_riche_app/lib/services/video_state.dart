@@ -171,10 +171,33 @@ class VideoState extends ChangeNotifier {
     _preloadVideos();
   }
 
+  void pauseAllVideos() {
+    if (_isDisposed) return;
+    
+    for (final controller in _controllers.values) {
+      if (controller.value.isInitialized && controller.value.isPlaying) {
+        controller.pause();
+      }
+    }
+  }
+
+  void stopAllVideos() {
+    if (_isDisposed) return;
+    
+    for (final controller in _controllers.values) {
+      if (controller.value.isInitialized) {
+        controller.pause();
+        controller.seekTo(Duration.zero);
+      }
+    }
+  }
+
   @override
   void dispose() {
     _isDisposed = true;
     _debounceTimer?.cancel();
+    
+    stopAllVideos();
     
     for (final controller in _controllers.values) {
       controller.dispose();

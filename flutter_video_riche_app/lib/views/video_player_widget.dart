@@ -85,7 +85,7 @@ class VideoPlayerWidget extends ConsumerWidget {
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withValues(alpha: 0.3),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
