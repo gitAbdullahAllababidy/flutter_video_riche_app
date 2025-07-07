@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'stories_screen.dart';
 import 'video_feed_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -49,6 +50,34 @@ class HomeScreen extends StatelessWidget {
               ),
               child: const Text(
                 'Open Video Feed',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const StoriesScreen(),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.purple,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+              child: const Text(
+                'Open Stories',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
