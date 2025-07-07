@@ -27,6 +27,31 @@ class VideoState extends ChangeNotifier {
       url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/20/9e4c4767-6a22-4428-8eac-2723b7167c15.mp4',
       title: 'Video 4',
     ),
+    VideoModel(
+      id: '5',
+      url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/20/8f7e4860-7609-44c8-9a87-8296a7398275.mp4',
+      title: 'Video 5',
+    ),
+    VideoModel(
+      id: '6',
+      url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/19/db4b3a63-f3ae-4761-82b0-c287acdf4b3b.mp4',
+      title: 'Video 6',
+    ),
+    VideoModel(
+      id: '7',
+      url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/e85edcd1-57b4-401a-b380-1f9f86dd6f9f.mp4',
+      title: 'Video 7',
+    ),
+    VideoModel(
+      id: '8',
+      url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/9114dffa-2cfc-4f9f-b375-6de249bbb329.mp4',
+      title: 'Video 8',
+    ),
+    VideoModel(
+      id: '9',
+      url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/f858ae9b-e967-4ed8-bb65-d55175b8ee23.mp4',
+      title: 'Video 9',
+    ),
   ];
 
   final Map<int, CachedVideoPlayerPlusController> _controllers = {};
