@@ -9,8 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cached_video_player_plus: ^3.0.2
-  flutter_riverpod: ^2.5.1
+  # State management
+  flutter_riverpod: ^2.6.1
+  # Media and video
+  cached_video_player_plus: ^3.0.3
+  cached_network_image: ^3.4.1
   visibility_detector: ^0.4.0
 
 dev_dependencies:

@@ -123,6 +123,9 @@ class VideoState extends ChangeNotifier {
         if (_isDisposed) return;
         _isInitialized[index] = true;
         
+        // Set video to mute by default
+        controller.setVolume(0.0);
+        
         if (index == _currentIndex) {
           controller.play();
         }
