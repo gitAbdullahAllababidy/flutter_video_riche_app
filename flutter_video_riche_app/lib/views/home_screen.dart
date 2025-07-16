@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../services/axis_reels_provider.dart';
 import 'axis_reels_explore_screen.dart';
 import 'axis_reels_screen.dart';
+import 'grid_video_screen.dart';
 import 'stories_screen.dart';
 import 'video_feed_screen.dart';
 
@@ -68,6 +69,34 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
               child: const Text(
                 'Open Video Feed',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const GridVideoScreen(),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 32,
+                  vertical: 16,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+              child: const Text(
+                'Grid Videos (MediaKit)',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,

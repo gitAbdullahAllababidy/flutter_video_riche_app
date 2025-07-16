@@ -1,3 +1,6 @@
+// Grid Video Solution using MediaKit
+// Features: Max 2 concurrent videos, debounced visibility detection,
+// session caching, muted playback, seamless looping, responsive grid
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,8 +17,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Video Feed App',
+
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );
   }
+  
 }
