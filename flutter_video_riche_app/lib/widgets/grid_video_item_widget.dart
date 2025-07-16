@@ -10,7 +10,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 
 import '../models/grid_video_model.dart';
 import '../providers/grid_video_provider.dart';
-import '../services/grid_video_cache_service.dart';
+import '../services/grid_video_enhanced_cache_service.dart';
 
 class GridVideoItemWidget extends ConsumerStatefulWidget {
   final GridVideoModel video;
@@ -29,7 +29,7 @@ class GridVideoItemWidget extends ConsumerStatefulWidget {
 class _GridVideoItemWidgetState extends ConsumerState<GridVideoItemWidget> {
   Player? _player;
   VideoController? _videoController;
-  late GridVideoCacheService _cacheService;
+  late GridVideoEnhancedCacheService _cacheService;
   
   bool _isPlayerInitialized = false;
   bool _hasError = false;
@@ -171,16 +171,22 @@ class _GridVideoItemWidgetState extends ConsumerState<GridVideoItemWidget> {
     try {
       _cacheService.setVideoLoading(widget.video.id, true);
       
-      // Open video URL
-      await _player!.open(Media(widget.video.url));
+      // Use cached video file if available, otherwise use original URL
+      final videoSource = _cacheService.getVideoSource(widget.video.id);
+      await _player!.open(Media(videoSource));
       
-      // Wait for video to be ready
-      await _player!.stream.duration.first;
+      // Wait for video to be ready and capture duration
+      final duration = await _player!.stream.duration.first;
       
       if (mounted) {
         setState(() {
           _isPlayerInitialized = true;
         });
+        
+        // Update duration in cache (utilizing duration parameter)
+        if (duration.inSeconds > 0) {
+          _cacheService.updateVideoDuration(widget.video.id, duration);
+        }
         
         // Update cache state
         ref.read(gridVideoStateProvider.notifier).updateVideoLoaded(widget.video.id, true);

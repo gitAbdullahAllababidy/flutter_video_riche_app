@@ -1,6 +1,12 @@
-// Grid Video Solution using MediaKit
-// Features: Max 2 concurrent videos, debounced visibility detection,
-// session caching, muted playback, seamless looping, responsive grid
+// Grid Video Solution using MediaKit + Flutter Cache Manager
+// ✅ UPDATED FEATURES:
+// - MediaKit video playback with flutter_cache_manager for optimal caching
+// - Exact 150ms settling time for visibility detection (main objective)
+// - Max 2 videos play simultaneously when visible after 150ms settling
+// - All model parameters utilized: duration, lastPosition, lastPlayedAt, errorMessage
+// - Enhanced priority system with file caching consideration
+// - Pre-caching of video files for smoother playback
+// - Comprehensive error handling with detailed error messages
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

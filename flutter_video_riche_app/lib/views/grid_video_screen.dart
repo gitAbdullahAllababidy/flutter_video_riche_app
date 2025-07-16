@@ -324,6 +324,7 @@ class _GridVideoScreenState extends ConsumerState<GridVideoScreen>
           // Cache statistics
           _buildDebugRow('Total Videos', '${cacheStats['totalVideos'] ?? 0}'),
           _buildDebugRow('Playing Videos', '${cacheStats['playingVideos'] ?? 0}/2'),
+          _buildDebugRow('Visible Videos', '${cacheStats['visibleVideos'] ?? 0}'),
           _buildDebugRow('Cached Players', '${cacheStats['cachedPlayers'] ?? 0}'),
           _buildDebugRow('Session Duration', '${cacheStats['sessionDuration'] ?? 0}min'),
           
@@ -341,8 +342,16 @@ class _GridVideoScreenState extends ConsumerState<GridVideoScreen>
             error: (error, stack) => _buildDebugRow('Active Players', 'Error'),
           ),
           
-          // Scroll state
+          // Scroll state and optimization
           _buildDebugRow('Scroll State', _isScrolling ? 'Scrolling' : 'Settled'),
+          _buildDebugRow('Auto-Optimization', '${cacheStats['optimizationActive'] ?? false ? 'Active' : 'Inactive'}'),
+          
+          // Visible videos details
+          if (cacheStats['visibleVideos'] != null && cacheStats['visibleVideos'] > 0) ...[
+            const SizedBox(height: 4),
+            _buildDebugRow('Top 2 Visible', _formatVideoList(cacheStats['top2VisibleIds'])),
+            _buildDebugRow('All Visible Optimal', '${cacheStats['allVisiblePlaying'] ?? false ? '✅' : '❌'}'),
+          ],
           
           const SizedBox(height: 8),
           
@@ -392,5 +401,16 @@ class _GridVideoScreenState extends ConsumerState<GridVideoScreen>
         ],
       ),
     );
+  }
+
+  /// Format video ID list for display
+  String _formatVideoList(dynamic videoIds) {
+    if (videoIds == null) return 'None';
+    if (videoIds is! List) return 'None';
+    if (videoIds.isEmpty) return 'None';
+    
+    return videoIds
+        .map((id) => id.toString().split('_').last) // Show just the number part
+        .join(', ');
   }
 } 

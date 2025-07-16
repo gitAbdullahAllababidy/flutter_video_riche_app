@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import 'grid_video_cache_service.dart';
+import 'grid_video_enhanced_cache_service.dart';
 
 /// Manages video playback with intelligent prioritization and resource optimization
 class GridVideoPlaybackManager {
@@ -10,17 +10,16 @@ class GridVideoPlaybackManager {
   factory GridVideoPlaybackManager() => _instance;
   GridVideoPlaybackManager._internal();
 
-  final GridVideoCacheService _cacheService = GridVideoCacheService();
+  final GridVideoEnhancedCacheService _cacheService = GridVideoEnhancedCacheService();
   
   // Scroll detection
   bool _isScrolling = false;
   Timer? _scrollStopTimer;
-  final Duration _scrollDebounceDelay = const Duration(milliseconds: 300);
+  final Duration _scrollDebounceDelay = const Duration(milliseconds: 150);
   
   // Performance monitoring
   int _playbackRequests = 0;
   int _playbackDenials = 0;
-  DateTime? _lastPerformanceCheck;
   
   // Stream controllers for manager events
   final StreamController<PlaybackEvent> _eventsController = StreamController.broadcast();

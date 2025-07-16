@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../models/grid_video_model.dart';
-import '../services/grid_video_cache_service.dart';
+import '../services/grid_video_enhanced_cache_service.dart';
 
 /// Sample video data provider
 final gridVideoDataProvider = Provider<List<GridVideoModel>>((ref) {
@@ -98,8 +98,8 @@ final gridVideoDataProvider = Provider<List<GridVideoModel>>((ref) {
 });
 
 /// Grid video cache service provider
-final gridVideoCacheServiceProvider = Provider<GridVideoCacheService>((ref) {
-  final service = GridVideoCacheService();
+final gridVideoCacheServiceProvider = Provider<GridVideoEnhancedCacheService>((ref) {
+  final service = GridVideoEnhancedCacheService();
   
   // Dispose when provider is disposed
   ref.onDispose(() {
@@ -116,7 +116,7 @@ class GridVideoStateNotifier extends StateNotifier<Map<String, GridVideoModel>> 
     _setupCacheListener();
   }
 
-  final GridVideoCacheService _cacheService;
+  final GridVideoEnhancedCacheService _cacheService;
   final List<GridVideoModel> _videoData;
   
   // Debounce timers for visibility changes
@@ -125,6 +125,9 @@ class GridVideoStateNotifier extends StateNotifier<Map<String, GridVideoModel>> 
   // Scroll detection
   bool _isScrolling = false;
   Timer? _scrollDebounceTimer;
+  
+  // Periodic optimization timer
+  Timer? _optimizationTimer;
 
   /// Initialize videos in cache
   void _initializeVideos() {
@@ -157,8 +160,8 @@ class GridVideoStateNotifier extends StateNotifier<Map<String, GridVideoModel>> 
     // Update visibility immediately in state
     _updateVideoVisibility(videoId, isVisible);
     
-    // Debounce the playback decision
-    _debounceTimers[videoId] = Timer(const Duration(milliseconds: 400), () {
+    // Debounce the playback decision (150ms settling time as per requirement)
+    _debounceTimers[videoId] = Timer(const Duration(milliseconds: 150), () {
       _handleDebouncedVisibilityChange(videoId, isVisible);
     });
   }
@@ -173,12 +176,16 @@ class GridVideoStateNotifier extends StateNotifier<Map<String, GridVideoModel>> 
     if (isScrolling) {
       // Pause all videos when scrolling starts
       _pauseAllVideos();
-    } else {
-      // Restart visible videos after scroll settles
-      _scrollDebounceTimer = Timer(const Duration(milliseconds: 300), () {
-        _resumeVisibleVideos();
-      });
-    }
+      // Cancel optimization during scrolling
+      _cancelPeriodicOptimization();
+          } else {
+        // Restart visible videos after scroll settles (150ms settling time)
+        _scrollDebounceTimer = Timer(const Duration(milliseconds: 150), () {
+          _resumeVisibleVideos();
+          // Schedule periodic optimization to ensure best visible videos are always playing
+          _schedulePeriodicOptimization();
+        });
+      }
     
     if (kDebugMode) {
       print('[GridVideoProvider] Scroll state changed: ${isScrolling ? "scrolling" : "settled"}');
@@ -198,45 +205,16 @@ class GridVideoStateNotifier extends StateNotifier<Map<String, GridVideoModel>> 
     if (video == null) return;
 
     if (isVisible && !video.isPlaying) {
-      _requestVideoPlayback(videoId);
+      // Re-evaluate all visible videos to ensure best 2 are playing
+      _optimizeVisibleVideoPlayback();
     } else if (!isVisible && video.isPlaying) {
       _stopVideoPlayback(videoId);
+      // After stopping, check if other visible videos can start playing
+      _optimizeVisibleVideoPlayback();
     }
   }
 
-  /// Request video playback (respects max 2 limit)
-  void _requestVideoPlayback(String videoId) {
-    if (!_cacheService.canVideoPlay(videoId)) {
-      // Find lowest priority playing video to stop
-      final playingVideos = _cacheService.playingVideos;
-      if (playingVideos.isNotEmpty) {
-        String? lowestPriorityVideoId;
-                 int lowestPriority = double.maxFinite.toInt();
-        
-        for (final playingVideoId in playingVideos) {
-          final priority = _cacheService.getPlaybackPriority(playingVideoId);
-          if (priority < lowestPriority) {
-            lowestPriority = priority;
-            lowestPriorityVideoId = playingVideoId;
-          }
-        }
-        
-        final newVideoPriority = _cacheService.getPlaybackPriority(videoId);
-        if (lowestPriorityVideoId != null && newVideoPriority > lowestPriority) {
-          _stopVideoPlayback(lowestPriorityVideoId);
-        } else {
-          if (kDebugMode) {
-            print('[GridVideoProvider] Cannot start $videoId - no lower priority videos to stop');
-          }
-          return;
-        }
-      }
-    }
-    
-    if (_cacheService.addToPlayingList(videoId)) {
-      _startVideoPlayback(videoId);
-    }
-  }
+  
 
   /// Start video playback
   void _startVideoPlayback(String videoId) {
@@ -291,10 +269,88 @@ class GridVideoStateNotifier extends StateNotifier<Map<String, GridVideoModel>> 
 
   /// Resume visible videos after scroll settles
   void _resumeVisibleVideos() {
-    for (final video in state.values) {
-      if (video.isVisible && !video.isPlaying) {
-        _requestVideoPlayback(video.id);
+    _optimizeVisibleVideoPlayback();
+  }
+
+  /// Optimize playback to ensure the best 2 visible videos are always playing
+  void _optimizeVisibleVideoPlayback() {
+    // Get all currently visible videos without errors
+    final visibleVideos = state.values
+        .where((video) => video.isVisible && !video.hasError)
+        .toList();
+    
+    if (visibleVideos.isEmpty) {
+      // No visible videos, stop all playback
+      for (final videoId in _cacheService.playingVideos.toList()) {
+        _stopVideoPlayback(videoId);
       }
+      return;
+    }
+    
+    // Sort visible videos by priority (highest first)
+    visibleVideos.sort((a, b) {
+      final priorityA = _cacheService.getPlaybackPriority(a.id);
+      final priorityB = _cacheService.getPlaybackPriority(b.id);
+      return priorityB.compareTo(priorityA);
+    });
+    
+    // Determine which videos should be playing (top 2 visible)
+    final shouldBePlaying = visibleVideos.take(2).map((v) => v.id).toList();
+    final currentlyPlaying = _cacheService.playingVideos.toList();
+    
+    // Stop videos that shouldn't be playing
+    for (final videoId in currentlyPlaying) {
+      if (!shouldBePlaying.contains(videoId)) {
+        _stopVideoPlayback(videoId);
+        if (kDebugMode) {
+          print('[GridVideoProvider] Stopped $videoId - not in top 2 visible videos');
+        }
+      }
+    }
+    
+    // Start videos that should be playing but aren't
+    for (final videoId in shouldBePlaying) {
+      final video = state[videoId];
+      if (video != null && !video.isPlaying && _cacheService.canVideoPlay(videoId)) {
+        if (_cacheService.addToPlayingList(videoId)) {
+          _startVideoPlayback(videoId);
+          if (kDebugMode) {
+            print('[GridVideoProvider] Started $videoId - top priority visible video');
+          }
+        }
+      }
+    }
+    
+    if (kDebugMode) {
+      print('[GridVideoProvider] Optimized playback: ${shouldBePlaying.length} visible videos, playing: ${_cacheService.playingVideos.length}/2');
+      print('[GridVideoProvider] Currently playing: ${_cacheService.playingVideos}');
+      print('[GridVideoProvider] Should be playing: $shouldBePlaying');
+    }
+  }
+
+  /// Schedule periodic optimization to ensure optimal video selection
+  void _schedulePeriodicOptimization() {
+    _optimizationTimer?.cancel();
+    
+    // Optimize every 2 seconds to ensure best visible videos are playing
+    _optimizationTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      if (!_isScrolling) {
+        _optimizeVisibleVideoPlayback();
+      }
+    });
+    
+    if (kDebugMode) {
+      print('[GridVideoProvider] Scheduled periodic optimization every 2 seconds');
+    }
+  }
+
+  /// Cancel periodic optimization
+  void _cancelPeriodicOptimization() {
+    _optimizationTimer?.cancel();
+    _optimizationTimer = null;
+    
+    if (kDebugMode) {
+      print('[GridVideoProvider] Cancelled periodic optimization');
     }
   }
 
@@ -319,9 +375,31 @@ class GridVideoStateNotifier extends StateNotifier<Map<String, GridVideoModel>> 
     _cacheService.updateVideoState(videoId, updatedVideo);
   }
 
-  /// Get cache statistics
+  /// Get cache statistics with visible video information
   Map<String, dynamic> getCacheStats() {
-    return _cacheService.getCacheStats();
+    final baseStats = _cacheService.getCacheStats();
+    
+    // Add visible videos information
+    final visibleVideos = state.values.where((video) => video.isVisible).toList();
+    final visibleVideoIds = visibleVideos.map((v) => v.id).toList();
+    
+    // Sort visible videos by priority to show which should be playing
+    visibleVideos.sort((a, b) {
+      final priorityA = _cacheService.getPlaybackPriority(a.id);
+      final priorityB = _cacheService.getPlaybackPriority(b.id);
+      return priorityB.compareTo(priorityA);
+    });
+    
+    final top2VisibleIds = visibleVideos.take(2).map((v) => v.id).toList();
+    
+    return {
+      ...baseStats,
+      'visibleVideos': visibleVideoIds.length,
+      'visibleVideoIds': visibleVideoIds,
+      'top2VisibleIds': top2VisibleIds,
+      'allVisiblePlaying': top2VisibleIds.every((id) => _cacheService.playingVideos.contains(id)),
+      'optimizationActive': _optimizationTimer?.isActive ?? false,
+    };
   }
 
   @override
@@ -333,6 +411,7 @@ class GridVideoStateNotifier extends StateNotifier<Map<String, GridVideoModel>> 
     _debounceTimers.clear();
     
     _scrollDebounceTimer?.cancel();
+    _cancelPeriodicOptimization();
     
     super.dispose();
   }
