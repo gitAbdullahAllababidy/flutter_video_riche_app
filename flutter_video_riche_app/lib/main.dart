@@ -9,10 +9,13 @@
 // - Comprehensive error handling with detailed error messages
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:media_kit/media_kit.dart';
 
 import 'views/home_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MediaKit.ensureInitialized();
   runApp(const ProviderScope(child: MainApp()));
 }
 
