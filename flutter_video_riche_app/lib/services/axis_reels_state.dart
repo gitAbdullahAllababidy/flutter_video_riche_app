@@ -22,7 +22,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=20',
         title: 'Amazing Video 1',
-        loopCount: 3,
+        loopCount: 25,
       ),
     ],
     // Row 2: Ocean & Video
@@ -39,7 +39,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=900&auto=format&fit=crop&q=20',
         title: 'Adventure Video',
-        loopCount: 2,
+        loopCount: 25,
       ),
     ],
     // Row 3: City & Video
@@ -56,7 +56,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&auto=format&fit=crop&q=20',
         title: 'Urban Life',
-        loopCount: 4,
+        loopCount: 25,
       ),
     ],
     // Row 4: Nature & Video
@@ -73,7 +73,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=900&auto=format&fit=crop&q=20',
         title: 'Nature Walk',
-        loopCount: 3,
+        loopCount: 25,
       ),
     ],
     // Row 5: Technology & Video
@@ -90,7 +90,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&auto=format&fit=crop&q=20',
         title: 'Innovation',
-        loopCount: 2,
+        loopCount: 25,
       ),
     ],
     // Row 6: Space & Video
@@ -107,7 +107,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=900&auto=format&fit=crop&q=20',
         title: 'Space Exploration',
-        loopCount: 5,
+        loopCount: 25,
       ),
     ],
     // Row 7: Food & Video
@@ -124,7 +124,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1493770348161-369560ae357d?w=900&auto=format&fit=crop&q=20',
         title: 'Cooking Show',
-        loopCount: 3,
+        loopCount: 25,
       ),
     ],
     // Row 8: Art & Video
@@ -141,7 +141,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=900&auto=format&fit=crop&q=20',
         title: 'Creative Process',
-        loopCount: 4,
+        loopCount: 25,
       ),
     ],
     // Row 9: Sports & Video
@@ -158,7 +158,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&auto=format&fit=crop&q=20',
         title: 'Athletic Performance',
-        loopCount: 2,
+        loopCount: 25,
       ),
     ],
     // Row 10: Travel & Video
@@ -175,7 +175,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=900&auto=format&fit=crop&q=20',
         title: 'Travel Journey',
-        loopCount: 3,
+        loopCount: 25,
       ),
     ],
     // Row 11: Architecture & Video
@@ -192,7 +192,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1448630360428-65456885c650?w=900&auto=format&fit=crop&q=20',
         title: 'Architectural Wonder',
-        loopCount: 4,
+        loopCount: 25,
       ),
     ],
     // Row 12: Animals & Video
@@ -209,7 +209,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=900&auto=format&fit=crop&q=20',
         title: 'Animal Kingdom',
-        loopCount: 3,
+        loopCount: 25,
       ),
     ],
     // Row 13: Music & Video
@@ -226,7 +226,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=900&auto=format&fit=crop&q=20',
         title: 'Musical Performance',
-        loopCount: 2,
+        loopCount: 25,
       ),
     ],
     // Row 14: Fashion & Video
@@ -243,7 +243,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900&auto=format&fit=crop&q=20',
         title: 'Style Showcase',
-        loopCount: 5,
+        loopCount: 25,
       ),
     ],
     // Row 15: Fitness & Video
@@ -260,7 +260,7 @@ class AxisReelsState extends ChangeNotifier {
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&auto=format&fit=crop&q=20',
         title: 'Workout Routine',
-        loopCount: 3,
+        loopCount: 25,
       ),
     ],
   ];

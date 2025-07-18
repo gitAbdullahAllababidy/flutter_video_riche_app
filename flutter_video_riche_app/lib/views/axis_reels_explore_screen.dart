@@ -106,7 +106,7 @@ class _AxisReelsExploreScreenState extends ConsumerState<AxisReelsExploreScreen>
       key: Key(reel.id),
       onVisibilityChanged: (info) {
         if (reel.type == ReelType.video) {
-          final isVisible = info.visibleFraction > 0.6; // 60% visibility threshold
+          final isVisible = info.visibleFraction > 0.9; // 60% visibility threshold
           axisReelsState.onVideoVisibilityChanged(reel.id, isVisible);
         }
       },
