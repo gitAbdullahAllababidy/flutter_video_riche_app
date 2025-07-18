@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 import '../models/dual_video_clip_model.dart';
 import '../providers/dual_video_provider.dart';
-import '../widgets/dual_video_item_widget.dart';
+import '../providers/global_video_provider.dart';
+import '../services/enhanced_video_cache_manager.dart';
+import '../widgets/enhanced_video_widget.dart';
 
 class DualVideoScreen extends ConsumerStatefulWidget {
   const DualVideoScreen({super.key});
@@ -15,14 +16,43 @@ class DualVideoScreen extends ConsumerStatefulWidget {
 
 class _DualVideoScreenState extends ConsumerState<DualVideoScreen> {
   @override
+  void initState() {
+    super.initState();
+    _initializeCacheManager();
+  }
+
+  Future<void> _initializeCacheManager() async {
+    try {
+      await EnhancedVideoCacheManager.instance.initialize();
+      print('[DualVideoScreen] Cache manager initialized');
+    } catch (e) {
+      print('[DualVideoScreen] Error initializing cache manager: $e');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenState = ref.watch(dualVideoScreenProvider);
+    final globalStatsAsync = ref.watch(videoPlaybackStatsProvider);
 
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: const Text('Videos', style: TextStyle(color: Colors.white)),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text('Videos', style: TextStyle(color: Colors.white, fontSize: 18)),
+            globalStatsAsync.when(
+              data: (stats) => Text(
+                'Global: ${stats['playingVideos']}/2 playing • ${stats['visibleVideos']} visible',
+                style: const TextStyle(color: Colors.white70, fontSize: 12),
+              ),
+              loading: () => const Text('Loading...', style: TextStyle(color: Colors.white70, fontSize: 12)),
+              error: (_, __) => const SizedBox.shrink(),
+            ),
+          ],
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
@@ -32,7 +62,22 @@ class _DualVideoScreenState extends ConsumerState<DualVideoScreen> {
           ? const Center(child: Text('Error loading videos', style: TextStyle(color: Colors.white)))
           : !screenState.isInitialized
               ? const Center(child: CircularProgressIndicator())
-              : _buildVideoGrid(screenState),
+              : Column(
+                  children: [
+                    // Global video limit info banner
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.all(12),
+                      color: Colors.blue[900],
+                      child: const Text(
+                        '🎯 Global Video Management Active: Only 2 videos play at a time across the entire app',
+                        style: TextStyle(color: Colors.white, fontSize: 12),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Expanded(child: _buildVideoGrid(screenState)),
+                  ],
+                ),
     );
   }
 
@@ -54,22 +99,29 @@ class _DualVideoScreenState extends ConsumerState<DualVideoScreen> {
   }
 
   Widget _buildVideoItem(DualVideoClipModel video, DualVideoScreenState screenState) {
-    final isPlaying = screenState.playingVideos.contains(video.id);
-    final isVisible = screenState.visibleVideos.contains(video.id);
-    
-    return VisibilityDetector(
-      key: Key('dual_video_${video.id}'),
-      onVisibilityChanged: (info) {
-        final isNowVisible = info.visibleFraction > 0.5; // 50% visibility threshold
-        ref.read(dualVideoScreenProvider.notifier).updateVideoVisibility(
-          video.id,
-          isNowVisible,
-        );
-      },
-      child: DualVideoItemWidget(
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: ref.watch(globalVideoManagerProvider).isVideoPlaying(video.id)
+            ? Colors.green
+            : Colors.transparent,
+          width: 2,
+        ),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: EnhancedVideoWidget(
         video: video,
-        isPlaying: isPlaying,
-        isVisible: isVisible,
+        onVisibilityChanged: (videoId, isVisible) {
+          // Optional: Still notify the dual video provider for state tracking
+          ref.read(dualVideoScreenProvider.notifier).updateVideoVisibility(
+            videoId,
+            isVisible,
+          );
+          print('[DualVideoScreen] 📱 Video $videoId visibility: $isVisible');
+        },
+        autoPlay: true,
+        showControls: false,
+        fit: BoxFit.cover,
       ),
     );
   }

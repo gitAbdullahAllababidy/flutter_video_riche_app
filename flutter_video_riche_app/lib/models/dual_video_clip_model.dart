@@ -3,9 +3,10 @@ class DualVideoClipModel {
   final String videoUrl;
   final String clipUrl;
   final String thumbnail;
+  final String? placeholderUrl; // Optional placeholder image
   final String? title;
   final String? description;
-  
+
   // Playback state tracking
   final bool isLoaded;
   final bool isPlaying;
@@ -16,12 +17,20 @@ class DualVideoClipModel {
   final DateTime? lastPlayedAt;
   final bool hasError;
   final String? errorMessage;
+
+  // Caching state tracking
+  final bool isVideoCached;
+  final bool isThumbnailCached;
+  final bool isBuffering;
+  final String? cachedVideoPath;
+  final String? cachedThumbnailPath;
   
   const DualVideoClipModel({
     required this.id,
     required this.videoUrl,
     required this.clipUrl,
     required this.thumbnail,
+    this.placeholderUrl,
     this.title,
     this.description,
     this.isLoaded = false,
@@ -33,6 +42,11 @@ class DualVideoClipModel {
     this.lastPlayedAt,
     this.hasError = false,
     this.errorMessage,
+    this.isVideoCached = false,
+    this.isThumbnailCached = false,
+    this.isBuffering = false,
+    this.cachedVideoPath,
+    this.cachedThumbnailPath,
   });
 
   DualVideoClipModel copyWith({
@@ -40,6 +54,7 @@ class DualVideoClipModel {
     String? videoUrl,
     String? clipUrl,
     String? thumbnail,
+    String? placeholderUrl,
     String? title,
     String? description,
     bool? isLoaded,
@@ -51,12 +66,18 @@ class DualVideoClipModel {
     DateTime? lastPlayedAt,
     bool? hasError,
     String? errorMessage,
+    bool? isVideoCached,
+    bool? isThumbnailCached,
+    bool? isBuffering,
+    String? cachedVideoPath,
+    String? cachedThumbnailPath,
   }) {
     return DualVideoClipModel(
       id: id ?? this.id,
       videoUrl: videoUrl ?? this.videoUrl,
       clipUrl: clipUrl ?? this.clipUrl,
       thumbnail: thumbnail ?? this.thumbnail,
+      placeholderUrl: placeholderUrl ?? this.placeholderUrl,
       title: title ?? this.title,
       description: description ?? this.description,
       isLoaded: isLoaded ?? this.isLoaded,
@@ -68,6 +89,11 @@ class DualVideoClipModel {
       lastPlayedAt: lastPlayedAt ?? this.lastPlayedAt,
       hasError: hasError ?? this.hasError,
       errorMessage: errorMessage ?? this.errorMessage,
+      isVideoCached: isVideoCached ?? this.isVideoCached,
+      isThumbnailCached: isThumbnailCached ?? this.isThumbnailCached,
+      isBuffering: isBuffering ?? this.isBuffering,
+      cachedVideoPath: cachedVideoPath ?? this.cachedVideoPath,
+      cachedThumbnailPath: cachedThumbnailPath ?? this.cachedThumbnailPath,
     );
   }
 
@@ -78,6 +104,7 @@ class DualVideoClipModel {
       videoUrl: json['videoUrl'] as String,
       clipUrl: json['clipUrl'] as String,
       thumbnail: json['thumbnail'] as String,
+      placeholderUrl: json['placeholderUrl'] as String?,
       title: json['title'] as String?,
       description: json['description'] as String?,
     );

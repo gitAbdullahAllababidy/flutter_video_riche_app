@@ -13,17 +13,23 @@ final dualVideoClipsProvider = Provider<List<DualVideoClipModel>>((ref) {
     {
       "videoUrl": "https://d2594vc0rpodpd.cloudfront.net/vids/post/2025/05/26/56801aaa-5943-4b70-9d52-ffa829516c07.mp4",
       "clipUrl": "https://d2594vc0rpodpd.cloudfront.net/vids/post/2025/05/26/56801aaa-5943-4b70-9d52-ffa829516c07_clip.mp4",
-      "thumbnail": "https://plus.unsplash.com/premium_photo-1663954642189-47be8570548e?q=80&w=854&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "thumbnail": "https://plus.unsplash.com/premium_photo-1663954642189-47be8570548e?q=80&w=854&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "placeholderUrl": "https://via.placeholder.com/400x600/FF6B6B/FFFFFF?text=Video+1",
+      "title": "Nature Scene"
     },
     {
       "videoUrl": "https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/20/bc5a9f69-7e63-4560-bfb2-27bff03ca22d.mp4",
       "clipUrl": "https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/20/bc5a9f69-7e63-4560-bfb2-27bff03ca22d_clip.mp4",
-      "thumbnail": "https://images.unsplash.com/photo-1667068733512-ec5218389de2?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "thumbnail": "https://images.unsplash.com/photo-1667068733512-ec5218389de2?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "placeholderUrl": "https://via.placeholder.com/400x600/4ECDC4/FFFFFF?text=Video+2",
+      "title": "Urban Life"
     },
     {
       "videoUrl": "https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/ff628e34-77f9-4ba5-8187-0154688e48ff.mp4",
       "clipUrl": "https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/ff628e34-77f9-4ba5-8187-0154688e48ff_clip.mp4",
-      "thumbnail": "https://images.unsplash.com/photo-1577154879758-6892cd7e8e87?q=80&w=742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "thumbnail": "https://images.unsplash.com/photo-1577154879758-6892cd7e8e87?q=80&w=742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "placeholderUrl": "https://via.placeholder.com/400x600/45B7D1/FFFFFF?text=Video+3",
+      "title": "Adventure"
     },
     {
       "videoUrl": "https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/56335c22-c132-4377-8b21-3b218bf3a211.mp4",

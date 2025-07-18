@@ -19,6 +19,11 @@ dependencies:
   media_kit: ^1.1.10
   media_kit_video: ^1.2.4
   media_kit_libs_video: ^1.0.4
+  # Enhanced caching and networking
+  dio: ^5.4.0
+  dio_cache_interceptor: ^3.5.0
+  dio_cache_interceptor_file_store: ^1.2.2
+  path_provider: ^2.1.2
   # Additional utilities
   collection: ^1.18.0
 
