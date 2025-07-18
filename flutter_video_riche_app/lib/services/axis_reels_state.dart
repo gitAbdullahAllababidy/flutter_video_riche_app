@@ -18,7 +18,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '2',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/d0df89a1-b959-4397-b71f-4f3f0b25da33.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/af543177-374f-4947-bdbc-a3bacd65e42b_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&auto=format&fit=crop&q=20',
         title: 'Amazing Video 1',
@@ -35,7 +35,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '4',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/dbeef944-c64c-4b78-8e80-bdb22b60f6ad.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/post/2025/06/23/1bd946af-27cd-4ff7-85a3-733010f47cd2_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=900&auto=format&fit=crop&q=20',
         title: 'Adventure Video',
@@ -52,7 +52,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '6',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/25b57cb5-64a6-417f-b464-a024c3d73061.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/post/2025/05/26/2a1735d7-10b4-46a3-b585-998c7f67b18f_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&auto=format&fit=crop&q=20',
         title: 'Urban Life',
@@ -69,7 +69,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '8',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/20/9e4c4767-6a22-4428-8eac-2723b7167c15.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/f965c476-298d-4c63-99b8-555bdc68b034_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=900&auto=format&fit=crop&q=20',
         title: 'Nature Walk',
@@ -86,7 +86,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '10',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/20/8f7e4860-7609-44c8-9a87-8296a7398275.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/19/a03a15ed-e776-4858-9247-df622b3aa1c8_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&auto=format&fit=crop&q=20',
         title: 'Innovation',
@@ -103,7 +103,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '12',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/19/db4b3a63-f3ae-4761-82b0-c287acdf4b3b.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/cfd211b2-089e-44a3-885e-ad0cbbb30efb_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=900&auto=format&fit=crop&q=20',
         title: 'Space Exploration',
@@ -120,7 +120,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '14',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/e85edcd1-57b4-401a-b380-1f9f86dd6f9f.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/a4d71594-60ad-4011-a12d-e78342a37e82_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1493770348161-369560ae357d?w=900&auto=format&fit=crop&q=20',
         title: 'Cooking Show',
@@ -137,7 +137,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '16',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/9114dffa-2cfc-4f9f-b375-6de249bbb329.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/20/5ef3d25f-81e5-4b4a-9172-90ad4c279e05_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=900&auto=format&fit=crop&q=20',
         title: 'Creative Process',
@@ -154,7 +154,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '18',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/f858ae9b-e967-4ed8-bb65-d55175b8ee23.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/20/d27090f4-6e09-4bb4-917c-eb988e674a17_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&auto=format&fit=crop&q=20',
         title: 'Athletic Performance',
@@ -171,7 +171,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '20',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/d0df89a1-b959-4397-b71f-4f3f0b25da33.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/9bf8cb2d-0a69-47a4-8bc6-c932b9876b68_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=900&auto=format&fit=crop&q=20',
         title: 'Travel Journey',
@@ -188,7 +188,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '22',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/dbeef944-c64c-4b78-8e80-bdb22b60f6ad.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/post/2025/06/10/87ed3cd9-6c45-45c2-b8d0-d16fa4c78c72_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1448630360428-65456885c650?w=900&auto=format&fit=crop&q=20',
         title: 'Architectural Wonder',
@@ -205,7 +205,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '24',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/25b57cb5-64a6-417f-b464-a024c3d73061.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/aec5fc11-84bf-4faa-a166-f3a5ce96819d_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=900&auto=format&fit=crop&q=20',
         title: 'Animal Kingdom',
@@ -222,7 +222,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '26',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/20/9e4c4767-6a22-4428-8eac-2723b7167c15.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/post/2025/05/20/852d06a6-3fd6-4f1a-8a78-931a1d3fb8cc_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=900&auto=format&fit=crop&q=20',
         title: 'Musical Performance',
@@ -239,7 +239,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '28',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/20/8f7e4860-7609-44c8-9a87-8296a7398275.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/05/25/6c6d90c7-2197-499c-88fe-7c97333fb7ab_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=900&auto=format&fit=crop&q=20',
         title: 'Style Showcase',
@@ -256,7 +256,7 @@ class AxisReelsState extends ChangeNotifier {
       ),
       AxisReelModel(
         id: '30',
-        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/19/db4b3a63-f3ae-4761-82b0-c287acdf4b3b.mp4',
+        url: 'https://d2594vc0rpodpd.cloudfront.net/vids/packages/2025/04/10/fd0004ef-a14b-464b-a24b-1b9e430ca3b5_clip.mp4',
         type: ReelType.video,
         thumbnailUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&auto=format&fit=crop&q=20',
         title: 'Workout Routine',
@@ -490,4 +490,4 @@ class AxisReelsState extends ChangeNotifier {
     
     super.dispose();
   }
-} 
+}
